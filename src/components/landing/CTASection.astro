@@ -1,0 +1,71 @@
+---
+import { Button } from "@/components/ui/Button";
+---
+
+<section class="bg-white">
+  <div class="container mx-auto px-4 md:px-6 mb-24">
+    <div class="bg-[#0f3e68] rounded-3xl overflow-hidden relative shadow-2xl flex flex-col lg:flex-row">
+      
+      {/* Left side image - Aerial view of a boat */}
+      <div class="lg:w-[35%] h-64 lg:h-auto relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#0f3e68] z-10 hidden lg:block"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0f3e68] to-transparent z-10 lg:hidden"></div>
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Perahu nelayan dari atas" class="w-full h-full object-cover object-center" />
+      </div>
+
+      {/* Right side content */}
+      <div class="lg:w-[65%] p-8 md:p-12 lg:p-16 flex flex-col justify-center z-20">
+        <div class="flex flex-col lg:flex-row gap-12 items-center lg:items-start justify-between">
+          
+          <div class="text-center lg:text-left flex-1">
+            <h2 class="text-3xl md:text-4xl font-bold font-['Outfit'] text-white mb-4">
+              Bergabunglah dengan BAHARI
+            </h2>
+            <p class="text-blue-100 text-lg mb-8 max-w-md mx-auto lg:mx-0">
+              Jadilah bagian dari ekosistem yang memberdayakan nelayan, koperasi, dan menjaga kelestarian laut kita.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="/register">
+                <Button className="bg-white text-[#0f3e68] hover:bg-slate-50 w-full sm:w-auto rounded-full px-8 py-6 text-base font-semibold">
+                  Daftar Sekarang
+                </Button>
+              </a>
+              <a href="/contact">
+                <Button variant="outline" className="border-white text-white hover:bg-white/10 w-full sm:w-auto rounded-full px-8 py-6 text-base font-semibold">
+                  Hubungi Kami
+                </Button>
+              </a>
+            </div>
+          </div>
+
+          {/* QR Codes section */}
+          <div class="flex gap-4 shrink-0 bg-[#0a2f52] p-6 rounded-2xl border border-[#ffffff15]">
+            <div class="flex flex-col items-center gap-3">
+              <div class="w-24 h-24 bg-white rounded-xl p-2 shadow-sm">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bahari.id/seller" alt="QR Code Seller" class="w-full h-full" />
+              </div>
+              <p class="text-white text-[10px] text-center opacity-80 leading-tight w-24">Unduh Aplikasi<br/><b>BAHARI Seller</b></p>
+              <div class="w-24 h-8 bg-black rounded-md flex items-center justify-center mt-1">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" class="h-6" />
+              </div>
+            </div>
+            
+            <div class="w-px bg-white/10 mx-1"></div>
+
+            <div class="flex flex-col items-center gap-3">
+              <div class="w-24 h-24 bg-white rounded-xl p-2 shadow-sm">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://bahari.id/buyer" alt="QR Code Buyer" class="w-full h-full" />
+              </div>
+              <p class="text-white text-[10px] text-center opacity-80 leading-tight w-24">Unduh Aplikasi<br/><b>BAHARI Buyer</b></p>
+              <div class="w-24 h-8 bg-black rounded-md flex items-center justify-center mt-1">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store" class="h-6" />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
