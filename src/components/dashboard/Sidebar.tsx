@@ -10,6 +10,10 @@ import {
   TrendingUp,
   Fish,
   CreditCard,
+  Radar,
+  Activity,
+  Map,
+  CloudRain,
 } from "lucide-react";
 
 interface SidebarProps {
@@ -26,6 +30,11 @@ const allMenuItems = [
   { label: "---", href: "", icon: null, roles: [] as UserRole[] },
   { label: "Data Komoditas", href: "/dashboard/commodities", icon: Fish, roles: ["cooperative_manager", "operator", "reviewer"] as UserRole[] },
   { label: "Data Transaksi", href: "/dashboard/transactions", icon: CreditCard, roles: ["cooperative_manager", "operator", "reviewer"] as UserRole[] },
+  { label: "---", href: "", icon: null, roles: [] as UserRole[] },
+  { label: "Price Radar", href: "/dashboard/price-radar", icon: Radar, roles: ["cooperative_manager", "reviewer"] as UserRole[] },
+  { label: "Demand Map", href: "/dashboard/demand-map", icon: Map, roles: ["cooperative_manager", "reviewer"] as UserRole[] },
+  { label: "Prediksi Stok", href: "/dashboard/predictions", icon: CloudRain, roles: ["cooperative_manager", "reviewer"] as UserRole[] },
+  { label: "Health Index", href: "/dashboard/health-index", icon: Activity, roles: ["cooperative_manager", "reviewer"] as UserRole[] },
 ];
 
 export function Sidebar({ className, currentPath }: SidebarProps) {
