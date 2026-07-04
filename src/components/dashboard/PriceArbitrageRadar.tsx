@@ -17,7 +17,7 @@ export function PriceArbitrageRadar() {
   useEffect(() => {
     async function fetch() {
       const coopId = user?.cooperativeId; if (!coopId) { setLoading(false); return; }
-      const url = `/price-radar/alerts?cooperativeId=${coopId}`;
+      const url = `/price-radar/compare?cooperativeId=${coopId}`;
       if (!isOnline()) { const c = await getCachedData(url); if (c) { setData(c.data); setOffline(true); } setLoading(false); return; }
       try { const r = await api.get(url); setData(r.data); await cacheData(url, r); } catch { setOffline(true); } finally { setLoading(false); }
     }
@@ -25,7 +25,7 @@ export function PriceArbitrageRadar() {
   }, []);
 
   if (loading) return <div className="grid gap-4 md:grid-cols-3">{[1,2,3].map(i=><Skeleton key={i} className="h-28 rounded-xl"/>)}</div>;
-  if (!data?.alerts?.length) {
+  if (!data?.alerts?.length && !data?.benchmarks?.length) {
     return (
       <div className="space-y-6">
         <h2 className="text-3xl font-bold font-['Outfit']">📡 Price Arbitrage Radar</h2>
@@ -35,6 +35,9 @@ export function PriceArbitrageRadar() {
   }
 
   const sevColors: Record<string, string> = { high: "bg-green-100 text-green-800", medium: "bg-yellow-100 text-yellow-800", low: "bg-gray-100 text-gray-600" };
+  
+  const allAlerts = data?.alerts || [];
+  const highCount = allAlerts.filter((a: any) => a.severity === 'high' || a.severity === 'medium').length;
 
   return (
     <div className="space-y-6">
@@ -47,9 +50,9 @@ export function PriceArbitrageRadar() {
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <KPICard title="Total Alert" value={data.totalAlerts} trend="neutral" />
-        <KPICard title="Peluang Tinggi" value={data.highCount} trend="up" description={`${data.highCount > 0 ? 'Ada peluang arbitrase' : 'Belum ada peluang signifikan'}`} />
-        <KPICard title="Status" value={data.highCount > 0 ? "ADA PELUANG" : "NORMAL"} trend={data.highCount > 0 ? "up" : "neutral"} />
+        <KPICard title="Total Komoditas Dibandingkan" value={allAlerts.length} trend="neutral" />
+        <KPICard title="Peluang Tinggi" value={highCount} trend="up" description={`${highCount > 0 ? 'Ada peluang arbitrase' : 'Belum ada peluang signifikan'}`} />
+        <KPICard title="Status" value={highCount > 0 ? "ADA PELUANG" : "NORMAL"} trend={highCount > 0 ? "up" : "neutral"} />
       </div>
 
       <Card>
@@ -63,7 +66,7 @@ export function PriceArbitrageRadar() {
                 </tr>
               </thead>
               <tbody>
-                {data.alerts.map((a: any, i: number) => (
+                {allAlerts.map((a: any, i: number) => (
                   <tr key={i} className="border-b last:border-0">
                     <td className="py-2 font-medium">{a.commodityName}</td>
                     <td className="py-2">Rp {a.localPrice.toLocaleString("id-ID")}</td>
